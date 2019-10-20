@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login & Registration</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body class="container">
+        <div class="row justify-content-between">
+            <form class="col-4" action='/process' method='POST'>
+                <h1>Register New User</h1>
+                {% with errors = get_flashed_messages(category_filter=["fname", "fname_val"]) %}
+                    {% if errors %}
+                        {% for msg in errors %}
+                            <p class="text-danger">{{ msg }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <p>First Name:</p>
+                <input type="text" name="fname" value="{{session['fname_entry']}}">
+                {% with errors = get_flashed_messages(category_filter=["lname", "lname_val"]) %}
+                    {% if errors %}
+                        {% for msg in errors %}
+                            <p class="text-danger">{{ msg }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <p>Last Name:</p>
+                <input type="text" name="lname" value="{{session['lname_entry']}}">
+                {% with errors = get_flashed_messages(category_filter=["email_enter", "email_val", "user_exists"]) %}
+                    {% if errors %}
+                        {% for msg in errors %}
+                            <p class="text-danger">{{ msg }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <p>Email:</p>
+                <input type="text" name="email" value="{{session['email_entry']}}">
+                {% with errors = get_flashed_messages(category_filter=["pw_enter", "pw_minimum"]) %}
+                    {% if errors %}
+                        {% for msg in errors %}
+                            <p class="text-danger">{{ msg }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <p>Create a password!</p>
+                <input type="password" name="pw">
+                {% with errors = get_flashed_messages(category_filter=["confirm", "pw_match"]) %}
+                    {% if errors %}
+                        {% for msg in errors %}
+                            <p class="text-danger">{{ msg }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <p>Confirm password:</p>
+                <input type="password" name="pwc">
+                <p><input type="submit" value="SUBMIT!!"></p>
+            </form>
+            <form class="col-4" action="/login" method="POST">
+                <h1>Log In</h1>
+                <p>Email: </p>
+                <input type="email" name="email">
+                <p>Password: </p>
+                <input type="password" name="pw">
+                <p><input type="submit" value="LOG IN!"></p>
+            </form>
+        </div>
+    </body>
+</html>
